@@ -32,8 +32,8 @@
   padding: 2px;
   font-weight: bolder;
   margin: 5px;
-  font-size: 19px;
-  padding: 2px 8px;
+  font-size: 1.6rem;
+  padding: 4px;
 }
 
 .m {
@@ -43,12 +43,25 @@
   padding: 2px;
   font-weight: bolder;
   margin: 5px;
-  font-size: 19px;
-  padding: 2px 8px;
+  font-size: 1.6rem;
+  padding: 4px;
 }
 .gender-image {
   display: block;
   margin: 0 auto;
-  height: 20%;
-  width: 20%;
+  width: 15%;
+}
+
+.options > input[type='radio'] {
+  width: 30px;
+  height: 30px;
+}
+
+.radio-buttons {
+  display: block;
+  margin: 10px;
+}
+.gender {
+  padding: 10px;
+  font-size: 2rem;
 }
