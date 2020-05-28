@@ -1,59 +1,58 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import babyNamesData from './babyNamesData.json';
 import ListBabyNames from './components/ListBabyNames';
 import image from './gender.png';
 import './App.css';
 const App = () => {
-  const [names, setName] = useState ('');
-  const [babyName, setBabyName] = useState ([]);
+  const [searchTerm, setSearchTerm] = useState ('');
+
   const [genderOption, setGenderOption] = useState ('');
 
-  const searchName = e => {
-    setName (e.target.value.toLowerCase ());
-  };
-  const filterByGender = e => {
-    setGenderOption (e.target.value);
-  };
-
-  useEffect (
-    () => {
-      setBabyName (
-        babyNamesData.filter (item => item.name.toLowerCase ().includes (names))
-      );
-      setGenderOption (
-        babyNamesData.filter (item => item.sex.includes (genderOption))
-      );
-    },
-    [names, genderOption]
+  const filteredBabyNames = babyNamesData.filter (name =>
+    name.name.toLowerCase ().includes (searchTerm.toLowerCase ())
   );
+
   return (
     <div className="container">
+
       <input
         className="search-input"
+        value={searchTerm}
         placeholder="Search baby names..."
-        onChange={searchName}
+        onChange={e => setSearchTerm (e.target.value)}
       />
+      <button className="search-button" onClick={() => setSearchTerm ('')}>
+        Clear
+      </button>
+
       <div className="radio-buttons">
-        <span class="options">
+
+        <span className="options">
           <input
             type="radio"
             name="gender"
             value="m"
-            onChange={filterByGender}
+            onClick={e => {
+              setGenderOption (e.target.value);
+            }}
           />
-          <label for="male" className="gender">Male</label>
+
+          <label className="gender">Male</label>
           <input
             type="radio"
             name="gender"
             value="f"
-            onChange={filterByGender}
+            onChange={e => {
+              setGenderOption (e.target.value);
+            }}
           />
-          <label for="female" className="gender">Female</label>
+          <label className="gender">Female</label>
         </span>
       </div>
+
       <img className="gender-image" src={image} alt="gender" />
       <hr className="horizontal-line" />
-      <ListBabyNames babyNames={babyName} />
+      <ListBabyNames babyNames={filteredBabyNames} />
       <hr className="horizontal-line" />
     </div>
   );
