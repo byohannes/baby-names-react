@@ -1,13 +1,25 @@
 import React from 'react';
 
-const ListBabyNames = props => {
-  
+const ListBabyNames = ({
+  babyNames,
+  removeName,
+  addToFavorite,
+}) => {
   return (
     <div className="all-Baby-Names">
-      {props.babyNames
-        .sort ((a, b) => (a.name>b.name)?1:-1)
-        .map ((data, index) => (
-          <p key={index} className={data.sex}>{data.name}</p>
+      {babyNames
+        .sort((a, b) => (a.name > b.name ? 1 : -1))
+        .map((data, index) => (
+          <p
+            key={index}
+            className={data.sex}
+            onClick={() => {
+              removeName(data.id);
+              addToFavorite(data.id);
+            }}
+          >
+            {data.name}
+          </p>
         ))}
     </div>
   );
